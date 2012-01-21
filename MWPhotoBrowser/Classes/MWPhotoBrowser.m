@@ -1038,12 +1038,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     if (actionSheet == _actionsSheet) {           
         // Actions 
         self.actionsSheet = nil;
-        if (buttonIndex == actionSheet.firstOtherButtonIndex) {
-            [self savePhoto]; return;
-        } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1) {
-            [self copyPhoto]; return;	
-        } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 2) {
-            [self emailPhoto]; return;
+        if (buttonIndex != actionSheet.cancelButtonIndex) {
+            if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+                [self savePhoto]; return;
+            } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1) {
+                [self copyPhoto]; return;	
+            } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 2) {
+                [self emailPhoto]; return;
+            }
         }
     }
     [self hideControlsAfterDelay]; // Continue as normal...
@@ -1054,7 +1056,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (MBProgressHUD *)progressHUD {
     if (!_progressHUD) {
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        _progressHUD.minSize = CGSizeMake(110, 110);
+        _progressHUD.minSize = CGSizeMake(120, 120);
         _progressHUD.minShowTime = 1;
         // The sample image is based on the
         // work by: http://www.pixelpressicons.com
